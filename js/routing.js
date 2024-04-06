@@ -29,7 +29,7 @@ var crashinfo=new CrashInfo();
 
 
 
-qIn=2200./3600;
+qIn=1500./3600;
 setSlider(slider_qIn, slider_qInVal, 3600*qIn, 0, "veh/h");
 
 var isGame=false;

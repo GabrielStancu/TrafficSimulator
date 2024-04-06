@@ -263,7 +263,7 @@ which always gives correct size!!
   position: absolute;
   top: 1vmin;
   height: 7vmin;
-  left: 75vmin;
+  left: 103vmin;
   width: 7vmin;
   z-index: 2; /* the higher the integer, the more on top */
 }
@@ -272,7 +272,7 @@ which always gives correct size!!
   position: absolute;
   top: 1vmin;
   height: 7vmin;
-  left: 66vmin;
+  left: 94vmin;
   width: 7vmin;
   z-index: 2; /* the higher the integer, the more on top */
 }
@@ -368,7 +368,7 @@ right top of simCanvas */
 #downloadDiv{
   position: absolute;
   top:   91.5%;
-  left:   85vmin;
+  left:   102vmin;
   width:  8vmin; /* no height */
   z-index: 2;
 }

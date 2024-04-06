@@ -482,7 +482,7 @@ function setSlider(slider, sliderHTMLval, value, commaDigits, str_units){
 
 // timewarp slider
 
-var timewarp=6;
+var timewarp=1;
 var slider_timewarp,slider_timewarpVal;
 if(document.getElementById("slider_timewarp")!==null){
     slider_timewarp = document.getElementById("slider_timewarp");
@@ -628,7 +628,7 @@ if(document.getElementById("slider_density")!==null){
 
 // offramp use fraction  slider
 
-var fracOff=0.25; 
+var fracOff=0.2; 
 var slider_fracOff;
 var slider_fracOffVal;
 if(document.getElementById("slider_fracOff")!==null){
