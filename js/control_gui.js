@@ -1083,39 +1083,39 @@ var downloadActive=false; // initialisation
 var dt_export=0.5;          // every dt_export seconds stored in exportString
 
 function downloadCallback(){
-  if(downloadActive){
-    performDownload();
-    downloadActive=false;
-    document.getElementById("download").src="figs/iconDownloadStart_small.png";
-  }
-  
-  else{ // title/header lines
-    for(var i=0; i<network.length; i++){
-      network[i].exportString
-        ="#time\tid\tx[m]\ty[m]\tspeed[m/s]\theading\tacc[m/s^2]";
+  setInterval(function() {
+    if(downloadActive){
+      performDownload();
+      downloadActive=false;
+      document.getElementById("download").src="figs/iconDownloadStart_small.png";
     }
-
-    if(typeof detectors!=="undefined"){
-      for (var iDet=0; iDet<detectors.length; iDet++){
-        var det=detectors[iDet];
-        console.log("det=",det);
-        det.exportString="#Detector "+iDet
- 	  +" at road "+det.road.roadID+" at position x="+det.u.toFixed(0)
-	  + " aggregation time [s]="+det.dtAggr
-	  +"\n#time[s]\tflow[veh/h]\tspeed[km/h]";
+    
+    else{ // title/header lines
+      for(var i=0; i<network.length; i++){
+        network[i].exportString
+          ="#time\tid\tx[m]\ty[m]\tspeed[m/s]\theading\tacc[m/s^2]";
       }
+  
+      if(typeof detectors!=="undefined"){
+        for (var iDet=0; iDet<detectors.length; iDet++){
+          var det=detectors[iDet];
+          console.log("det=",det);
+          det.exportString="#Detector "+iDet
+       +" at road "+det.road.roadID+" at position x="+det.u.toFixed(0)
+      + " aggregation time [s]="+det.dtAggr
+      +"\n#time[s]\tflow[veh/h]\tspeed[km/h]";
+        }
+      }
+      downloadActive=true;
+      document.getElementById("download").src="figs/iconDownloadFinish_small.png";
     }
-    downloadActive=true;
-    document.getElementById("download").src="figs/iconDownloadFinish_small.png";
-  }
+  }, 1000);
 }
 
 
 function performDownload(){// callback of download finish button
-  var msg="";
   for(var i=0; i<network.length; i++){
     var filename="road"+network[i].roadID+"_time"+time.toFixed(1)+".txt";
-    msg=msg+filename+" ";
     network[i].writeVehiclesSimpleToFile(filename);
   }
   if(typeof detectors!=="undefined"){
@@ -1123,14 +1123,11 @@ function performDownload(){// callback of download finish button
       var filename="Detector"+iDet
         +"_road"+detectors[iDet].road.roadID
         +"_x"+detectors[iDet].u.toFixed(0)+"_time"+time.toFixed(0)+".txt";
-      msg=msg+filename+" ";
       detectors[iDet].writeToFile(filename);
     }
   }
 
-  msg="wrote files "+msg+" to default folder (Downloads)";
   downloadActive=false;
-  alert(msg);
 }
 
 
