@@ -457,12 +457,12 @@ road.prototype.updateExportString=function(){
       var heading=(this.veh[i].speed>1e-4)
 	  ? this.veh[i].dvdt/this.veh[i].speed : 0;
       this.exportString=this.exportString+"\n"+time.toFixed(2)
-        + "\t"+this.veh[i].id
-        + "\t"+this.veh[i].u.toFixed(2)
-        + "\t"+this.veh[i].v.toFixed(2)
-        + "\t"+this.veh[i].speed.toFixed(2)
-        + "\t\t"+heading.toFixed(2)
-        + "\t"+this.veh[i].acc.toFixed(2)
+        + ","+this.veh[i].id
+        + ","+this.veh[i].u.toFixed(2)
+        + ","+this.veh[i].v.toFixed(2)
+        + ","+this.veh[i].speed.toFixed(2)
+        + ","+heading.toFixed(2)
+        + ","+this.veh[i].acc.toFixed(2)
         +"";
     }
   }

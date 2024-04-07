@@ -1089,11 +1089,10 @@ function downloadCallback(){
       downloadActive=false;
       document.getElementById("download").src="figs/iconDownloadStart_small.png";
     }
-    
     else{ // title/header lines
       for(var i=0; i<network.length; i++){
         network[i].exportString
-          ="#time\tid\tx[m]\ty[m]\tspeed[m/s]\theading\tacc[m/s^2]";
+          ="#time,id,x[m],y[m],speed[m/s],heading,acc[m/s^2]";
       }
   
       if(typeof detectors!=="undefined"){
@@ -1101,7 +1100,7 @@ function downloadCallback(){
           var det=detectors[iDet];
           console.log("det=",det);
           det.exportString="#Detector "+iDet
-       +" at road "+det.road.roadID+" at position x="+det.u.toFixed(0)
+        +" at road "+det.road.roadID+" at position x="+det.u.toFixed(0)
       + " aggregation time [s]="+det.dtAggr
       +"\n#time[s]\tflow[veh/h]\tspeed[km/h]";
         }
@@ -1114,8 +1113,9 @@ function downloadCallback(){
 
 
 function performDownload(){// callback of download finish button
+  var currentUtcTime = new Date().toISOString().replace(':', '_').replace(':', '_');
   for(var i=0; i<network.length; i++){
-    var filename="road"+network[i].roadID+"_time"+time.toFixed(1)+".txt";
+    var filename="road"+network[i].roadID+"_time"+currentUtcTime+".csv";
     network[i].writeVehiclesSimpleToFile(filename);
   }
   if(typeof detectors!=="undefined"){
