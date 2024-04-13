@@ -14,7 +14,7 @@
             src="js/jquery-1.12.4.min.js">
     </script>
 
-<title> Microsimulation of Traffic Flow: Navigation</title>
+<title> HiveWays Simulator</title>
 </head>
 
 
@@ -161,43 +161,6 @@
 </table>
 
 
-<!-- ######################################################## -->
-<!--<img src="figs/Lane-Changing_Behavior.png" width="60%"></img>-->
-<h3>Lane-Changing Behavior</h3>
-<!-- ######################################################## -->
-
-<table id="mainTable" border="0" cellspacing="1" cellpadding="0" >
-
-<tr>
-  <td>Politeness</td>
-  <td> <input id="slider_MOBIL_p" type="range" 
-              min="-0.2" max="1" step="0.1"></td>
-  <td> <div id="slider_MOBIL_pVal"></div> </td>
-</tr>
-
-<tr>
-  <td>LC Threshold</td>
-  <td> <input id="slider_MOBIL_bThr" type="range" 
-              min="-0.1" max="1" step="0.1"></td>
-  <td> <div id="slider_MOBIL_bThrVal"></div> </td>
-</tr>
-
-<tr>
-  <td>Right Bias Cars</td>
-  <td> <input id="slider_MOBIL_bBiasRight_car" type="range" 
-              min="-1" max="2" step="0.1"></td>
-  <td> <div id="slider_MOBIL_bBiasRight_carVal"></div> </td>
-</tr>
-
-<tr>
-  <td>Right Bias Trucks</td>
-  <td> <input id="slider_MOBIL_bBiasRight_truck" type="range" 
-              min="-1" max="2" step="0.1"></td>
-  <td> <div id="slider_MOBIL_bBiasRight_truckVal"></div> </td>
-</tr>
-</table>
-
-
 <!-- ############################################## -->
 <!-- info-text inside sliders-div (filled by showInfo())
 <!-- ############################################## -->
@@ -231,6 +194,7 @@
 <!-- specific scripts; position below any simulation elements ! -->
 <!-- ########################################################## -->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="js/seedrandom.min.js"></script> <!-- random w seed debug -->
 

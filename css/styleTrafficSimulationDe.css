@@ -393,7 +393,7 @@ right top of simCanvas */
 
 #sliders{ /* Also contains info text for non-BaWue simulations!*/
   position: absolute;
-  top: 20vmin;
+  top: 30vmin;
   height: 20vmin;
   left: 130vmin;
   width: 55vmin;

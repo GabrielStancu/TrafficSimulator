@@ -1088,7 +1088,9 @@ function downloadCallback(){
     if(downloadActive){
       performDownload();
       downloadActive=false;
-      document.getElementById("download").src="figs/iconDownloadStart_small.png";
+      document.getElementById("download").hidden=true;
+      document.getElementById("laneMinusDiv").hidden=true;
+      document.getElementById("lanePlusDiv").hidden=true;
     }
     else{ // title/header lines
       for(var i=0; i<network.length; i++){
@@ -1107,7 +1109,9 @@ function downloadCallback(){
         }
       }
       downloadActive=true;
-      document.getElementById("download").src="figs/iconDownloadFinish_small.png";
+      document.getElementById("download").hidden=true;
+      document.getElementById("laneMinusDiv").hidden=true;
+      document.getElementById("lanePlusDiv").hidden=true;
     }
   }, 1000);
 }
@@ -1137,59 +1141,42 @@ function performDownload(){// callback of download finish button
 // write (JSON or normal) string to file (automatically in download folder)
 //######################################################################
   
+// function download(data, filename) {
+//   // data is the string type, that contains the contents of the file.
+//   // filename is the default file name, some browsers allow the user to change this during the save dialog.
+//   const body = {
+//     fileName: filename,
+//     content: data
+//   };
+
+//   $.post("http://localhost:7115/api/CarDataReceiver", body, (_, status) => {
+//     console.log(status);
+//   });
+// }
+
+
+//######################################################################
+// export csv file to aggregator endpoint
+//######################################################################
+
 function download(data, filename) {
-    // data is the string type, that contains the contents of the file.
-    // filename is the default file name, some browsers allow the user to change this during the save dialog.
+  const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+  const formData = new FormData();
+  formData.append('file', blob, filename);
 
-    // Note that we use octet/stream as the mimetype
-    // this is to prevent some browsers from displaying the 
-    // contents in another browser tab instead of downloading the file
-    var blob = new Blob([data], {type:'octet/stream'});
-
-    //IE 10+
-    if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(blob, filename);
+  $.ajax({
+    url: "http://localhost:7115/api/CarDataReceiver",
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function(response, status, xhr) {
+      console.log(status);
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
     }
-    else {
-        //Everything else
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        document.body.appendChild(a);
-        a.href = url;
-        a.download = filename;
-
-        setTimeout(() => {
-            //setTimeout hack is required for older versions of Safari
-
-            a.click();
-
-            //Cleanup
-            window.URL.revokeObjectURL(url);
-            document.body.removeChild(a);
-        }, 1);
-    }
+  });
 }
 
-// async function download(data, filename){
-//   const containerName = 'cars';
-//   const storageAccountName = 'devstoreaccount1';
-//   const storageAccountKey = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
 
-//   const blobServiceClient = new BlobServiceClient(
-//       `http://127.0.0.1:10000/devstoreaccount1`,
-//       new Azure.Storage.SharedKeyCredential(storageAccountName, storageAccountKey)
-//   );
-
-//   const containerClient = blobServiceClient.getContainerClient(containerName);
-//   const blobClient = containerClient.getBlockBlobClient(filename);
-
-//   try {
-//       const uploadResponse = await blobClient.upload(data, data.length);
-//       console.log('Upload successful:', uploadResponse);
-
-//       alert('File uploaded successfully.');
-//   } catch (error) {
-//       console.error('Error uploading to Azure Blob:', error);
-//       alert('Error uploading file to Azure Blob Storage. See console for details.');
-//   }
-// }
