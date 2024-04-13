@@ -37,7 +37,7 @@ var isGame=false;
 fracTruck=0.15;
 setSlider(slider_fracTruck, slider_fracTruckVal, 100*fracTruck, 0, "%");
 
-IDM_a=0.9; // low to allow stopGo
+IDM_a=3; // low to allow stopGo
 setSlider(slider_IDM_a, slider_IDM_aVal, IDM_a, 1, "m/s<sup>2</sup>");
 
 factor_a_truck=1; // to allow faster slowing down of the uphill trucks

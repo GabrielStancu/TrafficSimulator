@@ -925,9 +925,9 @@ screen and (min-resolution: 97dpi) and (min-aspect-ratio: 6/5){
 
 
 #sliders{ /* Also contains info text for non-BaWue simulations!*/
-  top: 25vmin;
+  top: 0vmin;
   height: 20vmin;
-  left: 110vmin;
+  left: 125vmin;
   width: 70vmin;
 }
 

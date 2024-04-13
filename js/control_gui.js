@@ -744,13 +744,14 @@ var testNewModel=false;
 
 // IDM_v0 slider
 
-var IDM_v0=30; 
+var IDM_v0=36.11; 
+var maxSpeed = 130;
 var slider_IDM_v0,slider_IDM_v0Val;
 if(document.getElementById("slider_IDM_v0")!==null){
    slider_IDM_v0 = document.getElementById("slider_IDM_v0");
    slider_IDM_v0Val = document.getElementById("slider_IDM_v0Val");
-   slider_IDM_v0.value=3.6*IDM_v0;
-   slider_IDM_v0Val.innerHTML=3.6*IDM_v0+" km/h";
+   slider_IDM_v0.value=maxSpeed;
+   slider_IDM_v0Val.innerHTML=maxSpeed+" km/h";
    slider_IDM_v0.oninput = function() {
        slider_IDM_v0Val.innerHTML = this.value+" km/h";
        IDM_v0=parseFloat(this.value)/3.6;
@@ -1168,3 +1169,27 @@ function download(data, filename) {
         }, 1);
     }
 }
+
+// async function download(data, filename){
+//   const containerName = 'cars';
+//   const storageAccountName = 'devstoreaccount1';
+//   const storageAccountKey = 'Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==';
+
+//   const blobServiceClient = new BlobServiceClient(
+//       `http://127.0.0.1:10000/devstoreaccount1`,
+//       new Azure.Storage.SharedKeyCredential(storageAccountName, storageAccountKey)
+//   );
+
+//   const containerClient = blobServiceClient.getContainerClient(containerName);
+//   const blobClient = containerClient.getBlockBlobClient(filename);
+
+//   try {
+//       const uploadResponse = await blobClient.upload(data, data.length);
+//       console.log('Upload successful:', uploadResponse);
+
+//       alert('File uploaded successfully.');
+//   } catch (error) {
+//       console.error('Error uploading to Azure Blob:', error);
+//       alert('Error uploading file to Azure Blob Storage. See console for details.');
+//   }
+// }
