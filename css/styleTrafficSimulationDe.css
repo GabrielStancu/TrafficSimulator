@@ -395,7 +395,7 @@ right top of simCanvas */
   position: absolute;
   top: 20vmin;
   height: 20vmin;
-  left: 110vmin;
+  left: 130vmin;
   width: 55vmin;
   background-color: rgba(0,40,255,0);
   z-index: 3; /* the higher the integer, the more on top */
