@@ -449,17 +449,18 @@ road.prototype.writeVehiclesSimpleToFile=function(filename) {
 //######################################################################
 
 road.prototype.updateExportString=function(){
-
   var rest=time/dt_export-Math.floor((time+0.0001)/dt_export);
   
   if(rest<dt-0.0001){
     for(var i=0; i<this.veh.length; i++){
+      console.log(this.veh[i].x + " " + this.veh[i].y);
+
       var heading=(this.veh[i].speed>1e-4)
 	  ? this.veh[i].dvdt/this.veh[i].speed : 0;
       this.exportString=this.exportString+"\n"+time.toFixed(2)
         + ","+this.veh[i].id
-        + ","+this.veh[i].u.toFixed(2)
-        + ","+this.veh[i].v.toFixed(2)
+        + ","+this.veh[i].x.toFixed(2)
+        + ","+this.veh[i].y.toFixed(2)
         + ","+this.veh[i].speed.toFixed(2)
         + ","+heading.toFixed(2)
         + ","+this.veh[i].acc.toFixed(2)
@@ -1843,8 +1844,7 @@ road.prototype.updateSpeedPositions=function(){
 
       // longitudinal positional with old speeds
 
-      this.veh[i].u += Math.max(
-	0,this.veh[i].speed*dt+0.5*this.veh[i].acc*dt*dt);
+      this.veh[i].u += Math.max(0,this.veh[i].speed*dt+0.5*this.veh[i].acc*dt*dt);
 
       // longitudinal speed update 
 
@@ -4740,6 +4740,13 @@ road.prototype.drawVehicle=function(i,carImg, truckImg, obstacleImg,
     var yCenterPix=-scale*(traj[1](uCenterPhys) - vCenterPhys*cphiRoad
 			   -yOffset);
 
+    var xOffset = xCenterPix / 1400 * 350; // canvas is 1400 pixels wide, represents around 350 meters
+    var yOffset = yCenterPix / 1250 * 250; // canvas is 1250 pixels high, represents around 250 meters
+
+    this.veh[i].x = 46.7712 + xOffset / 111321; // reference point + offset divided by 1 long degree in meters
+    this.veh[i].y = 23.6236 + yOffset / 111321; // reference point + offset divided by 1 lat degree in meters
+
+    debugger;
 
     // (4) draw vehicle as image
 
